@@ -10,11 +10,13 @@ $(document).ready(function(){
             var inputBox = $('.searchbox-input');
             var searchBox = $('.searchbox');
             var rubrik = $('.rubrik');
+            var info = $('.info');
             var isOpen = false;
             submitIcon.click(function(){
                 if(isOpen === false){
                     searchBox.addClass('searchbox-open');
                     searchBox.animate({'right' : "-=275px"}, 200);
+                    info.slideUp(200);
                     rubrik.delay(900).slideUp(500);
                     inputBox.focus();
                     isOpen = true;
@@ -22,6 +24,7 @@ $(document).ready(function(){
                     searchBox.removeClass('searchbox-open');
                     inputBox.focusout();
                     searchBox.delay(700).animate({'right' : "+=275px"}, 200);
+                    info.slideDown(200);
                     rubrik.delay(1000).slideDown(500);
                     isOpen = false;
                 }
