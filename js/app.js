@@ -1,10 +1,4 @@
 $(document).ready(function(){
-
-
-
-
-
-
             var submitIcon = $('.searchbox-icon');
             var inputBox = $('.searchbox-input');
             var searchBox = $('.searchbox');
@@ -24,8 +18,9 @@ $(document).ready(function(){
                     searchBox.removeClass('searchbox-open');
                     inputBox.focusout();
                     try {
-                      $(".searchResultLink").slideDown(200);
-                      $(".searchResultLink").remove();
+                      $(".searchResultLink").slideUp(300, function(){
+                        $(".searchResultLink").remove();
+                      });
                     } catch (e) {
 
                     }
@@ -72,8 +67,10 @@ function submitClick(){
   var callback = '&callback=?';
   var inputBox = $('.searchbox-input');
   var searchTerm = inputBox.val();
-  $(".searchResultLink").slideDown(200);
-  $(".searchResultLink").remove();
+  $(".searchResultLink").slideUp(200, function(){
+    $(".searchResultLink").remove();
+  });
+
   $.getJSON(api + searchTerm + callback)
   .success(function(data){
     pages = data.query.pages;
@@ -96,6 +93,7 @@ function submitClick(){
     });
   })
   .then(function(){
+    $('.searchResultLink').slideDown();
     $('.searchbox-input').val('');
     $('.searchbox-icon').css('display','block');
   });
